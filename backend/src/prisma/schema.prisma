@@ -1,0 +1,26 @@
+model Post{
+
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title String
+  content String
+  tags Tag[]
+
+}
+
+model Tag {
+  id Int @id @default(autoincrement())
+  name String @unique
+  posts Post[]
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
