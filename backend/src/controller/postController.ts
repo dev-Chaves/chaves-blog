@@ -14,7 +14,7 @@ export const createPost = async (req: Request, res: Response) => {
             id: post.id,
             title: post.title,
             content: post.content,
-            tags: post.tags?.map(t => t.name) ?? []
+            tags: post.tags?.map((t: {name: string}) => t.name)
         }
 
         return res.status(201).json(response);

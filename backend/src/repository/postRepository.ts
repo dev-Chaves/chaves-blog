@@ -35,9 +35,17 @@ export class PostRepository {
 
     async consultarPost(){
         return await prisma.post.findMany({
-            include: {
-                tags: {select: {name: true}}
+            select:{
+                id: true,
+                title: true,
+                content: true,
+                tags: {
+                    select: {
+                        name: true
+                    }
+                }
             }
+        
         });
     }
 

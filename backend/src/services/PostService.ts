@@ -23,11 +23,16 @@ export class PostService {
     async getPosts(){
         const posts = await this.repo.consultarPost();
 
-        const response = posts.map(p => ({
+        const response = posts.map((
+            p: {
+                id: number, 
+                title: string, 
+                content: string, 
+                tags?: {name: string}[]}) => ({
             id: p.id,
             title: p.title,
             content: p.content,
-            tags: (p.tags ?? []).map((t: any) => t.name)
+            tags: (p.tags ?? []).map((p: {name: string}) => p.name)
         }));
 
         return response;
