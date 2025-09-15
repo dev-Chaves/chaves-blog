@@ -33,4 +33,8 @@ export class PostRepository {
 
     }
 
+    async consultarPost(){
+        return await prisma.post.findMany();
+    }
+
 }

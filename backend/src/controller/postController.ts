@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { PostService } from "../services/PostService";
+import { CreatePostResponse, GetAllPost } from "../dto/postsDTOs";
 
 const service = new PostService();
 
@@ -9,9 +10,32 @@ export const createPost = async (req: Request, res: Response) => {
 
         const post = await service.create({title, content, tags});
 
-        return res.status(201).json(post);
+        const response: CreatePostResponse = {
+            id: post.id,
+            title: post.title,
+            content: post.content,
+            tags: post.tags?.map(t => t.name) ?? []
+        }
+
+        return res.status(201).json(response);
+
     }catch(err: any){
+
         console.log(err);
-        return res.status(400).json({error: err.message ?? "Bad Request"})
+
+        return res.status(400).json({error: err.message ?? "Bad Request"});
+
     }
+}
+
+export const consultarPosts = async(req: Request, res: Response) => {
+
+    try{
+        const posts = await service.getPosts();
+        return res.json(posts);
+    }catch(err){
+        console.log(err);
+        return res.status(500).json({message: "Erro interno"});
+    }
+
 }

@@ -19,5 +19,9 @@ export class PostService {
 
     }
 
+    async getPosts(){
+        return this.repo.consultarPost();
+    }
+
 }
 
