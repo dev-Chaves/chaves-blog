@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { PostService } from "../services/PostService";
+import { postService } from "../services/PostService";
 import { CreatePostResponse, PostListItem } from "../dto/postsDTOs";
 
-const service = new PostService();
+const service = new postService();
 
 export const createPost = async (req: Request, res: Response) => {
     try{

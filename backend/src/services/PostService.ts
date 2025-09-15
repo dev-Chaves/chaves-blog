@@ -1,7 +1,7 @@
 import { PostListItem } from "../dto/postsDTOs";
 import { PostRepository } from "../repository/postRepository";
 
-export class PostService {
+export class postService {
     constructor(private repo = new PostRepository()){}
 
     async create (data: {
@@ -32,7 +32,7 @@ export class PostService {
             id: p.id,
             title: p.title,
             content: p.content,
-            tags: (p.tags ?? []).map((p: {name: string}) => p.name)
+            tags: (p.tags ?? []).map((tag: {name: string}) => tag.name)
         }));
 
         return response;
