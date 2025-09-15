@@ -1,3 +1,4 @@
+import { PostListItem } from "../dto/postsDTOs";
 import { PostRepository } from "../repository/postRepository";
 
 export class PostService {
@@ -20,7 +21,16 @@ export class PostService {
     }
 
     async getPosts(){
-        return this.repo.consultarPost();
+        const posts = await this.repo.consultarPost();
+
+        const response = posts.map(p => ({
+            id: p.id,
+            title: p.title,
+            content: p.content,
+            tags: (p.tags ?? []).map((t: any) => t.name)
+        }));
+
+        return response;
     }
 
 }

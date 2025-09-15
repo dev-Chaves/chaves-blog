@@ -11,10 +11,3 @@ export type PostListItem = {
     content: string;
     tags?: string[]
 }
-
-export type GetAllPost = {
-    posts: PostListItem[];
-    total?: number;
-    page?: number;
-    pageSize?: number;
-}
