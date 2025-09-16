@@ -1,10 +1,16 @@
 import { Router } from 'express';
-import { createPost, consultarPosts } from '../controller/postController';
+import { PostController } from '../controller/postController';
+import { PostRepository } from '../repository/postRepository';
+import { PostService } from '../services/postService';
 
 const router = Router();
 
-router.post("/", createPost);
+const repo = new PostRepository();
+const service = new PostService(repo);
+const controller = new PostController(service);
 
-router.get("/", consultarPosts);
+router.post("/", controller.create);
+
+router.get("/", controller.getAll);
 
 export default router;

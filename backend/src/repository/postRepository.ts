@@ -1,4 +1,5 @@
 import prisma from "../prisma/client";
+import { IPostRepository, PostRecord } from "./IPostRepository";
 
 type CreatePostInput = {
     title: string;
@@ -6,9 +7,9 @@ type CreatePostInput = {
     tags: string[];
 };
 
-export class PostRepository {
+export class PostRepository implements IPostRepository{
 
-    async createPost({title, content, tags}: CreatePostInput) {
+    async createPost({title, content, tags}: CreatePostInput): Promise<PostRecord> {
 
         const uniqueTags = Array.from( 
             new Set((tags || [])
