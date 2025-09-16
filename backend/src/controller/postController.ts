@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { postService } from "../services/PostService";
+import { postService } from "../services/postService";
 import { CreatePostResponse, PostListItem } from "../dto/postsDTOs";
 
 const service = new postService();
