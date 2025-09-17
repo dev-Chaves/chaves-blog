@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { PostController } from '../controller/postController';
 import { PostRepository } from '../repository/postRepository';
-import { PostService } from '../services/postService';
+import { PostService } from '../services/PostService';
 
 const router = Router();
 

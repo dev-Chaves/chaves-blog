@@ -1,45 +1,46 @@
 import { Request, Response } from "express";
-import { PostService } from "../services/postService";
+import { PostService } from "../services/PostService";
 import { CreatePostResponse, PostListItem } from "../dto/postsDTOs";
 
-export class PostController{
-    constructor(private service: PostService){}
+export class PostController {
+  constructor(private service: PostService) { }
 
-    getAll = async (req: Request, res: Response) => {
-    
-        try{
-            const {title, content, tags} = req.body;
+  create = async (req: Request, res: Response) => {
 
-            const post = await this.service.create({title, content, tags});
+    try {
+      const { title, content, tags } = req.body;
 
-            const response: CreatePostResponse = {
-                title: post.title,
-                content: post.content,
-                tags: post.tags?.map((t: {name: string}) => t.name)
-        }
+      const post = await this.service.create({ title, content, tags });
 
-        return res.status(201).json(response);
+      const response: CreatePostResponse = {
+        title: post.title,
+        content: post.content,
+        tags: post.tags?.map((t: { name: string }) => t.name)
+      }
 
-        }catch(err: any){
+      return res.status(201).json(response);
 
-            console.log(err);
+    } catch (err: any) {
 
-            return res.status(400).json({error: err.message ?? "Bad Request"});
+      console.log(err);
 
-        }
-    }
-    create = async(req: Request, res: Response) => {
-
-        try{
-            const posts = await this.service.getPosts();
-
-            return res.json(posts);
-        }catch(err){
-            console.log(err);
-            return res.status(500).json({message: "Erro interno"});
-        }
+      return res.status(400).json({ error: err.message ?? "Bad Request" });
 
     }
+  }
+
+  getAll = async (req: Request, res: Response) => {
+
+    try {
+      const posts = await this.service.getPosts();
+
+      return res.json(posts);
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ message: "Erro interno" });
+    }
+
+  }
 
 }
 
