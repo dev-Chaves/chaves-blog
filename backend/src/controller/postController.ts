@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { PostService } from "../services/PostService";
-import { CreatePostResponse, PostListItem } from "../dto/postsDTOs";
+import { CreatePostResponse } from "../dto/postsDTOs";
 
 export class PostController {
   constructor(private service: PostService) { }
@@ -40,6 +40,44 @@ export class PostController {
       return res.status(500).json({ message: "Erro interno" });
     }
 
+  }
+
+  alterarTitulo = async (req: Request, res: Response) => {
+      try{
+
+        const data = req.body;
+
+        const post = await this.service.alterarTitulo(data);
+
+        return res.status(200).json(post);
+
+      }catch(err){
+          console.log(`Error ao alterar titulo: ${err}`);
+          return res.status(400).json({message: err})
+      }
+  }
+
+  adicionarTags = async (req: Request, res: Response) => {
+    try{
+      const {id} = req.params;
+
+      const {tags} = req.body;
+
+      console.log(`Id: ${id}`);
+
+      const post = await this.service.adicionarTags(
+        {
+          id: parseInt(id),
+          tags: tags
+        }
+      );
+
+      return res.status(200).json(post);
+
+    }catch(err){
+      console.log(err);
+      return res.status(400).json("Erro na requisição");
+    }
   }
 
 }
