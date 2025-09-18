@@ -1,5 +1,5 @@
 import prisma from "../prisma/client";
-import { AdicionarTags, AlterarTitulo, IPostRepository, PostRecord } from "./IPostRepository";
+import { AdicionarTags, AlterarConteudo, AlterarTitulo, IPostRepository, PostRecord } from "./IPostRepository";
 
 type CreatePostInput = {
     title: string;
@@ -90,4 +90,28 @@ export class PostRepository implements IPostRepository{
 
     }
 
+    async apagarPost(input: number): Promise<void> {
+        await prisma.post.delete({
+            where:{
+                id: input
+            }
+        });
+    }
+
+
+    async editarConteudo(input: AlterarConteudo): Promise<PostRecord> {
+        
+        return await prisma.post.update({
+            where:{
+                id: input.id
+            },
+            data: {
+                content: input.content
+            },
+            include: {
+                tags: true
+            }
+        });
+
+    }
 }

@@ -27,9 +27,11 @@ export class PostService {
 
         const response = posts.map((
             p: {
+                id: number,
                 title: string, 
                 content: string, 
                 tags?: {name: string}[]}) => ({
+            id: p.id,
             title: p.title,
             content: p.content,
             tags: (p.tags ?? []).map((tag: {name: string}) => tag.name)
@@ -69,6 +71,21 @@ export class PostService {
             tags: (await response).tags,
         };
 
+    }
+
+    async apagarPost(data: {id: number}){
+        if(data.id == null || data.id <= 0){throw new Error("Id inválido!")}
+        
+        const deletarPost = this.repo.apagarPost(data.id);
+
+        console.log(`Post número ${data.id} apagado com sucesos!`);
+    
+    }
+
+    async alterarConteudo(data: {id: number, content: string}) {
+        if(!data.content.trim || data.id == null || data.id <= 0 ){throw new Error("Erro no conteúdo enviado")} 
+
+        return this.repo.editarConteudo(data);
     }
 
 }

@@ -80,5 +80,35 @@ export class PostController {
     }
   }
 
+  apagarPost = async (req: Request, res: Response) => {
+
+    try{
+
+      const {id} = req.params;
+
+      const apagarPost = this.service.apagarPost({id: parseInt(id)});
+
+      return res.status(200).json(apagarPost);
+
+    }catch(err){
+        console.log(`Erro: ${err}`);
+        return res.status(400).json("Erro ao apagar post!");
+    }
+  }
+
+  alterarConteudo = async (req: Request, res: Response) => {
+
+    try {
+      const {id} = req.params;
+      const {content} = req.body;
+      const editarConteudo = this.service.alterarConteudo({id: parseInt(id), content });
+      return res.status(200).json(editarConteudo);
+    } catch (err) {
+      console.log(`Error: ${err}`);
+      return res.status(400).json("Erro na requisição!");
+    }
+    
+  }
+
 }
 

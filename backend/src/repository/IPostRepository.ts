@@ -11,6 +11,7 @@ export type AlterarTitulo = {
 
 
 export type PostRecord = {
+    id: number;
     title: string;
     content: string;
     tags: {name: string}[];
@@ -21,9 +22,17 @@ export type AdicionarTags = {
     tags: string[];
 }
 
+export type AlterarConteudo = {
+    id: number;
+    content: string;
+}
+
+
 export interface IPostRepository {
     createPost(input: CreatePostInput): Promise<PostRecord>;
     consultarPost(): Promise<PostRecord[]>;
     alterarTitulo(input: AlterarTitulo): Promise<PostRecord>;
     adicionarTags(input: AdicionarTags): Promise<PostRecord>;
+    apagarPost(input: number): Promise<void>;
+    editarConteudo(input: AlterarConteudo): Promise<PostRecord>;
 }

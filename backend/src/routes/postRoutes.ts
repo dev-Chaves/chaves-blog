@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { PostController } from '../controller/postController';
+import { PostController } from '../controller/PostController';
 import { PostRepository } from '../repository/PostRepository';
 import { PostService } from '../services/PostService';
 
@@ -15,7 +15,10 @@ router.get("/", controller.getAll);
 
 router.post("/alterar-titulo", controller.alterarTitulo);
 
-router.patch(":id/adicionar-tags", controller.adicionarTags);
+router.patch("/adicionar-tags/:id", controller.adicionarTags);
 
+router.delete("/:id", controller.apagarPost);
+
+router.put("/:id", controller.alterarConteudo);
 
 export default router;
