@@ -101,13 +101,13 @@ export class PostController {
     try {
       const {id} = req.params;
       const {content} = req.body;
-      const editarConteudo = this.service.alterarConteudo({id: parseInt(id), content });
+      const editarConteudo = await this.service.alterarConteudo({id: parseInt(id), content });
       return res.status(200).json(editarConteudo);
     } catch (err) {
       console.log(`Error: ${err}`);
       return res.status(400).json("Erro na requisição!");
     }
-    
+
   }
 
 }

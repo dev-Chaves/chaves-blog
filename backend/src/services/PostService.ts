@@ -85,7 +85,16 @@ export class PostService {
     async alterarConteudo(data: {id: number, content: string}) {
         if(!data.content.trim || data.id == null || data.id <= 0 ){throw new Error("Erro no conteúdo enviado")} 
 
-        return this.repo.editarConteudo(data);
+        const newContent =  await this.repo.editarConteudo(data);
+
+        const response = {
+            id: newContent.id,
+            title: newContent.title,
+            content: newContent.content,
+            tags: newContent.tags
+        };
+
+        return response;
     }
 
 }
