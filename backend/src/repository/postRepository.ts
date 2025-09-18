@@ -1,5 +1,6 @@
+import { disconnect } from "process";
 import prisma from "../prisma/client";
-import { AdicionarTags, AlterarConteudo, AlterarTitulo, IPostRepository, PostRecord } from "./IPostRepository";
+import { AdicionarTags, AlterarConteudo, AlterarTitulo, ApagarTags, IPostRepository, PostRecord } from "./IPostRepository";
 
 type CreatePostInput = {
     title: string;
@@ -114,4 +115,24 @@ export class PostRepository implements IPostRepository{
         });
 
     }
+
+    async removerTags(input: ApagarTags): Promise<void> {
+        
+        const uniqueTags = [...new Set(input.idTags || [])];
+
+        if(uniqueTags.length === 0){return}
+
+        await prisma.post.update({
+            where:{
+                id: input.idPost
+            },
+            data:{
+                tags:{
+                    disconnect: uniqueTags.map(tagId => ({id: tagId}))
+                }
+            }
+
+        });
+    }
+
 }

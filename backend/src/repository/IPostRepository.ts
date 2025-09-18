@@ -27,6 +27,12 @@ export type AlterarConteudo = {
     content: string;
 }
 
+export type ApagarTags = {
+    idPost: number;
+    idTags: number[];
+}
+
+
 
 export interface IPostRepository {
     createPost(input: CreatePostInput): Promise<PostRecord>;
@@ -35,4 +41,5 @@ export interface IPostRepository {
     adicionarTags(input: AdicionarTags): Promise<PostRecord>;
     apagarPost(input: number): Promise<void>;
     editarConteudo(input: AlterarConteudo): Promise<PostRecord>;
+    removerTags(input: ApagarTags): Promise<void>;
 }

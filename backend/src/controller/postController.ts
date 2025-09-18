@@ -87,7 +87,7 @@ export class PostController {
       const {id} = req.params;
 
       const apagarPost = this.service.apagarPost({id: parseInt(id)});
-      
+
       return res.status(200).json(`Post número ${id} apagado com sucesos!`);
 
     }catch(err){
@@ -108,6 +108,13 @@ export class PostController {
       return res.status(400).json("Erro na requisição!");
     }
 
+  }
+
+  removerTags = async (req: Request, res: Response) => {
+    try{
+      const{idPost, idTags} = req.body;
+      const remTags = await this.service.adicionarTags({idPost, idTags})
+    }
   }
 
 }

@@ -97,5 +97,16 @@ export class PostService {
         return response;
     }
 
+    async removerTags(data: {idPost: number, idTags: number[]}){
+
+        const {idPost, idTags} = data;
+        
+        if(data.idTags.length === 0)throw new Error("Tags inválidas ou vazias");
+        if(data.idPost <= 0) throw new Error("Post inválido, id precisa ser maior que 0");
+
+        const altera = await this.repo.removerTags({idPost, idTags })
+
+    }
+
 }
 
