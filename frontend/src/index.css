@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@300..900&display=swap');
+@import "tailwindcss";
+
+
+:root{
+
+--color-primary: oklch(92.4% 0.12 95.746);
+--color-secondary: oklch(96.2% 0.059 95.617);
+--color-black: oklch(21.6% 0.006 56.043);
+--color-neutro: oklch(37.4% 0.01 67.558);
+--color-white: oklch(98.5% 0 0);
+  
+}
+
+@layer utilities{
+
+  .font-title{
+    font-family: "Darker Grotesque", sans-serif;
+    font-weight: 700;
+  }
+
+  .font-content{
+    font-family: "Darker Grotesque", sans-serif;
+    font-weight: 400;
+  }
+
+  .font-light{
+    font-family: "Darker Grotesque", sans-serif;
+    font-weight: 300;
+  }
+
+
+
+
+}
