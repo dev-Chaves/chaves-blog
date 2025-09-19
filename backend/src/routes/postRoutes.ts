@@ -21,4 +21,6 @@ router.delete("/:id", controller.apagarPost);
 
 router.put("/:id", controller.alterarConteudo);
 
+router.put("/", controller.removerTags);
+
 export default router;

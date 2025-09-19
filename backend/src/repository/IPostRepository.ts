@@ -14,7 +14,9 @@ export type PostRecord = {
     id: number;
     title: string;
     content: string;
-    tags: {name: string}[];
+    tags: {
+      id: number;name: string
+}[];
 };
 
 export type AdicionarTags = {
